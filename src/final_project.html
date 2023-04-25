@@ -14574,9 +14574,9 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><strong>Contributors</strong></p>
 <ul>
-<li>Yutian Wang(#85994168): Yutian contributed to data cleaning, formatting, standardization, visualization, and time-series analysis.</li>
-<li>Ronin Cunningham(#43949676): Ronin contributed by implementing the PyTorch neural network, making the SHAP visualization, and bar graph.</li>
-<li>Prayus Shrestha(#55823454): Prayus contributed by gathering the data through scraping and various APIs, and preparing it into a usable format.</li>
+<li>Yutian Wang(#85994168): Yutian contributed to the data cleaning, formatting, standardization, and visualizations.</li>
+<li>Ronin Cunningham(#43949676): Ronin contributed by implementing the PyTorch neural network, and made the SHAP visualization and bar graph.</li>
+<li>Prayus Shrestha(#55823454): Prayus contributed by gathering the data through scraping various APIs, prepared it into a usable format, and did some of the analysis regarding neural networks and the conclusion.</li>
 <li>Ebin Tomy(#44912301): Ebin contributed by writing the background, literature review, research layout, model results and conclusion section.</li>
 </ul>
 
@@ -14652,19 +14652,6 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>We used 3 Neural Nets</p>
-<ol>
-<li>Multilayer perceptron (MLP)</li>
-<li>Standard Recurrent Neural Network (RNN) with an Adam optimizer and L2 Regularization</li>
-<li>Gated recurrent units (GRU) with an Adam optimizer and L2 Regularization</li>
-</ol>
-
-</div>
-</div>
-</div>
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Data-Cleaning-and-Formatting">Data Cleaning and Formatting<a class="anchor-link" href="#Data-Cleaning-and-Formatting">&#182;</a></h2>
 </div>
 </div>
@@ -14708,7 +14695,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>The first step will be to read in the data from the <code>data/</code> folder. This data was scraped from various APIs online (details are in the <a href="https://github.com/PrayusShrestha/crop-price-prediction/blob/master/src/data_scraper.ipynb"><code>./data_scraper.ipynb</code></a> notebook. We"ll start by loading in the weather data, then moving to loading in commodity data.</p>
+<p>The first step will be to read in the data from the <code>data/</code> folder. This data was scraped from various APIs online (details are in the <a href="https://github.com/PrayusShrestha/crop-price-prediction/blob/master/src/data_scraper.ipynb"><code>./data_scraper.ipynb</code></a> notebook. We'll start by loading in the weather data, then moving to loading in commodity data.</p>
 
 </div>
 </div>
@@ -15068,7 +15055,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>We"ll want to transform these commodity dataframes to something more useable. The <code>clean_commodity_df</code> function below performs the necessary transformations: the index is set to be the date, a "price" column is made to be the midpoint between the high and low daily prices, NAs are dropped, and the dataframe is sorted according to date.</p>
+<p>We'll want to transform these commodity dataframes to something more useable. The <code>clean_commodity_df</code> function below performs the necessary transformations: the index is set to be the date, a "price" column is made to be the midpoint between the high and low daily prices, NAs are dropped, and the dataframe is sorted according to date.</p>
 
 </div>
 </div>
@@ -15349,7 +15336,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>An interesting observation is that weather may not have an immediate impact on corn prices, but instead impact future prices. To factor that in, we"re introducing lag variables; more specifically, to predict corn prices on day $i$, we"re looking at temperature and precipitation prices from days $i, i-1, i-7, i-30, i-84,$ and $i-365$. These values correspond with the previous day, week, month, and year, along with 84 days = 12 weeks which is the average time it takes to grow corn.</p>
+<p>An interesting observation is that weather may not have an immediate impact on corn prices, but instead impact future prices. To factor that in, we're introducing lag variables; more specifically, to predict corn prices on day $i$, we're looking at temperature and precipitation prices from days $i, i-1, i-7, i-30, i-84,$ and $i-365$. These values correspond with the previous day, week, month, and year, along with 84 days = 12 weeks which is the average time it takes to grow corn.</p>
 
 </div>
 </div>
@@ -15559,7 +15546,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Our features are properly cleaned now. Unfortunately, we have lost some rows due to NA values. This means that our target crop price dataframe doesn"t properly line up with our features dataframe. To fix this we will remove rows in the crop price dataframe that don"t have a matching date in the features dataframe.</p>
+<p>Our features are properly cleaned now. Unfortunately, we have lost some rows due to NA values. This means that our target crop price dataframe doesn't properly line up with our features dataframe. To fix this we will remove rows in the crop price dataframe that don't have a matching date in the features dataframe.</p>
 
 </div>
 </div>
@@ -15776,7 +15763,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Model-Training-and-Inference">Model Training and Inference<a class="anchor-link" href="#Model-Training-and-Inference">&#182;</a></h2><p>Now we can start training our models. We"ll start by splitting our data into a train/test split, with 80% of the data being reserved for training, and 20% for testing; this ensures that we have enough data to train a model, but also enough to properly validate our results. As many of the features are on different scales, we standardize them to make them comparable. Variables that have large values, can dominate the analysis if they are not standardized, so we"ll use the <code>StandardScaler()</code> to give each feature a mean of 0 and standard deviation of 1.</p>
+<h2 id="Model-Training-and-Inference">Model Training and Inference<a class="anchor-link" href="#Model-Training-and-Inference">&#182;</a></h2><p>Now we can start training our models. We'll start by splitting our data into a train/test split, with 80% of the data being reserved for training, and 20% for testing; this ensures that we have enough data to train a model, but also enough to properly validate our results. As many of the features are on different scales, we standardize them to make them comparable. Variables that have large values, can dominate the analysis if they are not standardized, so we'll use the <code>StandardScaler()</code> to give each feature a mean of 0 and standard deviation of 1.</p>
 
 </div>
 </div>
@@ -15883,7 +15870,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>As seen above, there doesn"t seem to be a strong linear mapping between corn price and temperature/precipitation. It"s also possible that the relationship between weather and corn prices is more complex than a simple linear relationship, and may require further analysis to uncover.</p>
+<p>As seen above, there doesn't seem to be a strong linear mapping between corn price and temperature/precipitation. It's also possible that the relationship between weather and corn prices is more complex than a simple linear relationship, and may require further analysis to uncover.</p>
 
 </div>
 </div>
@@ -16057,7 +16044,7 @@ RMSE of MLPRegressor: 21.296972253236394
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>The scatter plot above shows how the MLP is able to predict the pattern of the corn prices fairly accurately. Formally, The MLP Regressor showed a mean squared error of ~453.6 and an RMSE of ~21.</p>
-<p>We"ll use more complicated neural network architectures below to see if we can get a better result.</p>
+<p>We'll use more complicated neural network architectures below to see if we can get a better result.</p>
 
 </div>
 </div>
@@ -16087,7 +16074,7 @@ RMSE of MLPRegressor: 21.296972253236394
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>First, let"s set a manual seed for reproducable results.</p>
+<p>First, let's set a manual seed for reproducable results.</p>
 
 </div>
 </div>
@@ -16187,7 +16174,7 @@ RMSE of MLPRegressor: 21.296972253236394
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>PyTorch has a basic RNN model. See our class definition in <a href="https://github.com/PrayusShrestha/crop-price-prediction/blob/master/src/rnn_model.py"><code>./rnn_model.py</code></a> for more details on how we implemented it. Let"s train and test it out on our data:</p>
+<p>PyTorch has a basic RNN model. See our class definition in <a href="https://github.com/PrayusShrestha/crop-price-prediction/blob/master/src/rnn_model.py"><code>./rnn_model.py</code></a> for more details on how we implemented it. Let's train and test it out on our data:</p>
 
 </div>
 </div>
@@ -16229,7 +16216,7 @@ RMSE of MLPRegressor: 21.296972253236394
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Then, let"s load the training data and set our loss function (MSE). We will also use L2 regularization for our optimizer. This prevents overfitting by adding a penalty term. Then, we train the model by iterating through epochs (a complete cycle through the entire training data set).</p>
+<p>Then, let's load the training data and set our loss function (MSE). We will also use L2 regularization for our optimizer. This prevents overfitting by adding a penalty term. Then, we train the model by iterating through epochs (a complete cycle through the entire training data set).</p>
 
 </div>
 </div>
